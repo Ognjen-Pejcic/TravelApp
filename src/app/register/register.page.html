@@ -1,28 +1,39 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Register</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
-  <ion-list>
+<ion-content padding class="background">
+  <h1 class="naslov">
+    TRAVEL APP
+  </h1>
 
-    <ion-item>
-      <ion-label position="floating">Username</ion-label>
-      <ion-input type="text" [(ngModel)]="username"></ion-input>
-    </ion-item>
+  <ion-card class="nesto">
 
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
+    <ion-card-header class="header">
+      Register
+    </ion-card-header>
 
-    <ion-item>
-      <ion-label position="floating">Confirm password</ion-label>
-      <ion-input type="password" [(ngModel)]="cpassword"></ion-input>
-    </ion-item>
+    <ion-card-content >
+      <ion-list no-lines >
+        <ion-item >
+          <ion-label  position="floating">Username</ion-label>
+          <ion-input type="text" [(ngModel)]="username"></ion-input>
+        </ion-item>
 
-  </ion-list>
+        <ion-item >
+          <ion-label  position="floating">Password</ion-label>
+          <ion-input  type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
 
-  <ion-button fill="solid" expand="block" color="dark" (click)="register()">Sign up</ion-button>
+        <ion-item >
+          <ion-label position="floating" >Confirm password</ion-label>
+          <ion-input class="inp" type="password" [(ngModel)]="cpassword"></ion-input>
+        </ion-item>
+
+
+
+      </ion-list>
+    </ion-card-content>
+
+  </ion-card>
+
+
+  <ion-button width ="3em"fill="solid" ion-left expand="block" color="primary" (click)="register()">Sign up</ion-button>
 </ion-content>

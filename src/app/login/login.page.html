@@ -1,23 +1,35 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content padding class="background">
 
-<ion-content>
-  <ion-list>
+  <h1 class="naslov">
+    TRAVEL APP
+  </h1>
 
-    <ion-item>
-      <ion-label position="floating">Username</ion-label>
-      <ion-input type="text" [(ngModel)]="username"></ion-input>
-    </ion-item>
+  <ion-card class="nesto">
 
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
+    <ion-card-header class="header">
+      Login
+    </ion-card-header>
 
-  </ion-list>
+    <ion-card-content >
 
-  <ion-button fill="solid" expand="block" color="dark" (click)="login()">Login</ion-button>
+
+
+
+      <ion-list no-lines >
+
+
+        <ion-item>
+          <ion-label position="floating">Username</ion-label>
+          <ion-input  class="inp" type="text" [(ngModel)]="username" value="isndu"></ion-input>
+        </ion-item>
+
+        <ion-item class="aa">
+          <ion-label position ="floating">Password</ion-label>
+          <ion-input class="aa" type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-button fill="solid"  color="primary" expand="block"  (click)="login()">Login</ion-button>
 </ion-content>
