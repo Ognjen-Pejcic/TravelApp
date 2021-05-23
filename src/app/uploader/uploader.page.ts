@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserService } from '../user.service';
-import firestore from 'firebase/app'
+import {firestore} from 'firebase/app'
 
 @Component({
   selector: 'app-uploader',
@@ -29,7 +29,9 @@ export class UploaderPage implements OnInit {
     const desc = this.desc
 
     this.afstore.doc(`users/${this.user.getUID()}`).update({
-     // posts: firestore.FieldValue
+      posts: firestore.FieldValue.arrayUnion({
+        image, desc
+      })
     })
   }
 

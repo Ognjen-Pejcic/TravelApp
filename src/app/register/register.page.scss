@@ -34,6 +34,7 @@ ion-card{
 }
 .item{
     background-color: rgba(255,255,255,0.5);
+    color:black;
 }
 .naslov{
     display: table;
@@ -52,4 +53,7 @@ ion-card{
     display:table;
     margin: 0 auto;
 
+}
+.pp{
+    background-color: rgba(255,255,255,0.3);
 }
