@@ -9,6 +9,7 @@ import { UserService } from '../user.service';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { Subscription } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Component({
@@ -29,8 +30,10 @@ export class UploaderPage implements OnInit {
 
   @ViewChild('fileButton') fileButton
 
+
   constructor(
     public http: HttpClient,
+    public afstore: AngularFirestore,
     public user: UserService,
     public uploaderService:UploaderService
     ) { }
@@ -55,6 +58,12 @@ console.log(usr);
       //     desc,
       //     img
       // });
+
+      this.afstore.doc(`posts/${Image}`).set({
+        desc,
+        user: this.user.getUsername(),
+        likes: []
+      })
 
       this.uploaderService.addPhoto(usr, desc, img).subscribe((posts)=>{});
   }

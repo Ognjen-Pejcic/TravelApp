@@ -27,7 +27,7 @@ export class UploaderService{
         });
     }
 
-    getPhotos(){;
+    getPhotos(){
         return this.http.get<{[key: string]:ImageData}>(`https://project-24716-default-rtdb.europe-west1.firebasedatabase.app/images.json`);
     }
     get posts(){

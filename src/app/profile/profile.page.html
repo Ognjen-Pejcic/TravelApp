@@ -8,15 +8,11 @@
 
   <div id="images">
     
-    <div class="image" *ngFor="let post of (userPosts | async)?.posts">
+    <div class="image" *ngFor="let post of ((userPosts)?.posts)">
      
       <ion-card>
-        <ion-img src="https://ucarecdn.com/{{post.image}}/-/crop/200x200/center/"></ion-img>
+        <ion-img src="https://ucarecdn.com/{{post}}/-/scale_crop/200x200/center/"></ion-img>
       </ion-card>
-
-      <ion-content>
-        <p>{{post.desc}}</p>
-      </ion-content>
     </div>
   </div>
 

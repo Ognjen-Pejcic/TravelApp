@@ -12,6 +12,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth'
 import { HttpClientModule } from '@angular/common/http'
 import { UserService } from './user.service';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AuthService } from './auth.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,7 +27,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    UserService
+    UserService,
+    AuthService
   ],
   bootstrap: [AppComponent],
 })

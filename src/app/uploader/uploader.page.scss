@@ -3,12 +3,13 @@
     height: 200px;
     margin: 0 auto;
     background: black;
+    display: none;
 }
 .filebtn{
     opacity: 0;
     position: absoulte;
     top:-100em;
-left:-100em;
+    left:-100em;
 }
 .center{
     display:flex;
