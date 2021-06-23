@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "travel-app-ab0db": {
+      "hosting": {
+        "app": [
+          "travel-app-ab0db"
+        ]
+      }
+    }
+  }
+}
