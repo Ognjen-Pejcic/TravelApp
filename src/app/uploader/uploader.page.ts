@@ -36,6 +36,21 @@ export class UploaderPage implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.uploaderService.getPhotos().subscribe((ImageData)=>{
+      console.log(ImageData);
+      const images:Post[] = [];
+      for(const key in ImageData){
+        if(ImageData.hasOwnProperty(key)){
+          images.push({
+            id:key,
+            user:ImageData[key].user,
+            desc:ImageData[key].desc,
+            img:ImageData[key].img
+          });
+        }
+      }
+      this.posts = images;
+    });
   }
 
   createPost(){
