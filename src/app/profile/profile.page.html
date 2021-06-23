@@ -8,10 +8,10 @@
 
   <div id="images">
     
-    <div class="image" *ngFor="let post of ((userPosts)?.posts)">
+    <div class="image" *ngFor="let post of posts">
      
-      <ion-card>
-        <ion-img src="https://ucarecdn.com/{{post}}/-/scale_crop/200x200/center/"></ion-img>
+      <ion-card (click)="goTo(post.id)">
+        <ion-img src="https://ucarecdn.com/{{post.img}}/-/scale_crop/200x200/center/"></ion-img>
       </ion-card>
     </div>
   </div>
