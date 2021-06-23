@@ -7,6 +7,7 @@ interface ImageData{
     description: string,
     img: string
 }
+
 @Injectable({
     providedIn:"root"
 })
