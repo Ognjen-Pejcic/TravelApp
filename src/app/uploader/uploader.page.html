@@ -9,7 +9,7 @@
   <!-- <app-loading *ngIf="!busy"></app-loading> -->
 
   <!-- <div class="camera"></div> -->
-  <div class="center" *ngIf="!busy">
+  <!-- <div class="center" *ngIf="!busy"> -->
     <input type="file" *ngIf="!imageURL" (change)="fileChanged($event)" class="filebtn" #fileButton />
 
     <ion-button shape="round" color="primary" (click)="uploadFile()" *ngIf="!imageURL" fill="outline">Upload File
@@ -23,5 +23,5 @@
       
       </ion-card-content>
     </ion-card>
-  </div>
+  <!-- </div> -->
 </ion-content>
