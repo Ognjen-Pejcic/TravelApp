@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UploaderService } from '../uploader/uploader.service';
+import { UserService } from '../user.service';
 @Component({
   selector: 'app-post',
   templateUrl: './post.page.html',
@@ -14,7 +15,8 @@ export class PostPage implements OnInit {
   heartType: string = "heart-outline"
   private postSub: Subscription
   postref: AngularFirestoreDocument
-  constructor(private route: ActivatedRoute, private afs: AngularFirestore, private uploaderService:UploaderService) { 
+  constructor(private route: ActivatedRoute, private afs: AngularFirestore, private uploaderService:UploaderService, 
+    private userService:UserService) { 
 
   }
 
@@ -26,6 +28,7 @@ export class PostPage implements OnInit {
       this.post = post;
       // this.postref = post;
       // this.heartType = post.likes
+
       console.log(this.post);
     })
 
@@ -34,7 +37,12 @@ export class PostPage implements OnInit {
   }
 
   toggleHeart(){
-    this.heartType = this.heartType == "heart" ? "heart-outline":"heart"
-  }
+    const userid = this.userService.getUID();
+    console.log(userid, this.postID)
+    this.postSub = this.uploaderService.addLike(this.postID,userid).subscribe((post)=>{
+      this.post=post;
 
+    this.heartType = this.heartType == "heart" ? "heart-outline":"heart"
+  })
+}
 }

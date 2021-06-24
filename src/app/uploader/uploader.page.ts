@@ -75,11 +75,11 @@ export class UploaderPage implements OnInit {
     //   })
      
     
-      // this.http.post<{name: string}>(`https://project-24716-default-rtdb.europe-west1.firebasedatabase.app/images.json`, {
-      //     usr,
-      //     desc,
-      //     img
-      // });
+      this.http.post<{name: string}>(`https://project-24716-default-rtdb.europe-west1.firebasedatabase.app/images.json`, {
+          usr,
+          desc,
+          img
+      });
 
       this.afstore.doc(`posts/${Image}`).set({
         desc,
