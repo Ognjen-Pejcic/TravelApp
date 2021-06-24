@@ -4,15 +4,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <app-loading *ngIf="!userPosts"></app-loading>
 
-  <div id="images">
+  <div id="images" *ngFor="(userPosts | async)?.posts as posts">
     
     <div class="image" *ngFor="let post of posts">
      
-      <ion-card (click)="goTo(post.id)">
-        <ion-img src="https://ucarecdn.com/{{post.img}}/-/scale_crop/200x200/center/"></ion-img>
-      </ion-card>
+
+      <img (click)="goTo(post)" class="main-image" src="https://ucarecdn.com/{{post.img}}/-/scale_crop/200x200/center/"/>
+
     </div>
   </div>
 

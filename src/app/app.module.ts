@@ -13,6 +13,9 @@ import { HttpClientModule } from '@angular/common/http'
 import { UserService } from './user.service';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
+import { ShareModule } from './share.module';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,7 +26,8 @@ import { AuthService } from './auth.service';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule, 
     HttpClientModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    ShareModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

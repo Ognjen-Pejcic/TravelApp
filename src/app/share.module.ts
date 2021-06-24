@@ -4,19 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PostPageRoutingModule } from './post-routing.module';
+import { LoadingComponent } from './loading/loading.component';
 
-import { PostPage } from './post.page';
-import { ShareModule } from '../share.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PostPageRoutingModule,
-    ShareModule
+
   ],
-  declarations: [PostPage]
+  declarations: [LoadingComponent],
+  exports: [LoadingComponent]
 })
-export class PostPageModule {}
+export class ShareModule {}
