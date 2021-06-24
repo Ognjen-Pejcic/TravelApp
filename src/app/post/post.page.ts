@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UploaderService } from '../uploader/uploader.service';
@@ -13,6 +13,7 @@ export class PostPage implements OnInit {
   post
   heartType: string = "heart-outline"
   private postSub: Subscription
+  postref: AngularFirestoreDocument
   constructor(private route: ActivatedRoute, private afs: AngularFirestore, private uploaderService:UploaderService) { 
 
   }
@@ -23,6 +24,8 @@ export class PostPage implements OnInit {
 
     this.postSub = this.uploaderService.getPhoto(this.postID).subscribe((post)=>{
       this.post = post;
+      // this.postref = post;
+      // this.heartType = post.likes
       console.log(this.post);
     })
 

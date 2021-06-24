@@ -10,6 +10,8 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,6 +28,8 @@ export class UploaderPage implements OnInit {
   posts: Post[]
   private postSub: Subscription
 
+  busy: boolean = false
+
 
 
   @ViewChild('fileButton') fileButton
@@ -35,7 +39,9 @@ export class UploaderPage implements OnInit {
     public http: HttpClient,
     public afstore: AngularFirestore,
     public user: UserService,
-    public uploaderService:UploaderService
+    public uploaderService:UploaderService,
+    private alertController:AlertController,
+    private router:Router
     ) { }
 
   ngOnInit() {
@@ -56,12 +62,13 @@ export class UploaderPage implements OnInit {
     });
   }
 
-  createPost(){
+  async createPost(){
+    this.busy = true
     const img = this.imageURL
     const desc = this.desc
     const usr = this.user.getUID()
   
-console.log(usr);
+  console.log(usr);
     // this.afstore.doc(`users/${this.user.getUID()}`).update({
     //   posts: firebase.firestore.FieldValue.arrayUnion({
     //     image, desc
@@ -81,13 +88,28 @@ console.log(usr);
       })
 
       this.uploaderService.addPhoto(usr, desc, img).subscribe((posts)=>{});
-  }
+ 
+      this.busy = false
+      this.imageURL = ""
+      this.desc = ""
+
+      const alert =  await this.alertController.create({
+        header: 'Done',
+        message: 'Your post was created!',
+        buttons: ['Cool!']
+      })
+
+      await alert.present()
+
+      this.router.navigate(['/tabs/feed'])
+    }
 
   uploadFile(){
     this.fileButton.nativeElement.click()
   }
 
   fileChanged(event){
+    this.busy = true
     const files = event.target.files
     console.log(files)
 
@@ -101,6 +123,7 @@ console.log(data)
     this.http.post('https://upload.uploadcare.com/base/', data).subscribe(event=>{
       console.log(event)
       this.imageURL = event['file']
+      this.busy = false
     })
   }
 }
