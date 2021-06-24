@@ -18,6 +18,8 @@ export class ProfilePage implements OnInit {
 
   constructor(private afs:AngularFirestore, private user:UserService, private uploaderService: UploaderService, private router: Router) {
    
+    const usr = this.user.getUID()
+    console.log(usr)
     // this.uploaderService.getPhotos().subscribe((ImageData)=>{
     //   console.log(ImageData);
     //   const images:Post[] = [];
@@ -35,7 +37,7 @@ export class ProfilePage implements OnInit {
     //   console.log(this.posts)
     // });
 
-    this.postSub = this.uploaderService.getPhotos().subscribe((posts)=>{
+    this.postSub = this.uploaderService.getPhotosForUser(usr).subscribe((posts)=>{
       this.posts = posts;
       console.log(posts);
     })

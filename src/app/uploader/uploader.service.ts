@@ -67,6 +67,38 @@ export class UploaderService{
             })
           );
       }
+
+
+      getPhotosForUser(idd:string){
+        return this.http.get<{[key: string]:ImageData}>(`https://project-24716-default-rtdb.europe-west1.firebasedatabase.app/images.json`)
+        .pipe(
+            map((imagesdata) => {
+              const images: Post[] = [];
+              for (const key in imagesdata) {
+                
+                if (imagesdata.hasOwnProperty(key)) {
+                  console.log(imagesdata[key].user)
+                  console.log(idd)
+                  if(imagesdata[key].user===idd){
+                    images.push({
+                      id: key,
+                      user:imagesdata[key].user,
+                      desc:imagesdata[key].description,
+                      img:imagesdata[key].img
+                    });
+                  }
+                  
+                }
+              }
+              return images;
+            }),
+            tap(images => {
+              this._posts.next(images);
+            })
+          );
+      }
+
+
     get posts(){
         return this._posts.asObservable();
         }
@@ -80,14 +112,18 @@ export class UploaderService{
                   const images: Post[] = [];
                   for (const key in imagesdata) {
                     if (imagesdata.hasOwnProperty(key)) {
-                      images.push({
-                        id: key,
-                        user:imagesdata[key].user,
-                        desc:imagesdata[key].description,
-                        img:imagesdata[key].img
-                      });
+                      if(key===id){
+                        images.push({
+                          id: key,
+                          user:imagesdata[key].user,
+                          desc:imagesdata[key].description,
+                          img:imagesdata[key].img
+                        });
+                      }
+                  
                     }
                   }
+                  console.log(images)
                   return images[0];
                 }),
                )
