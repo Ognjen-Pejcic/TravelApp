@@ -1,4 +1,7 @@
 export interface Likes{
-    post:string,
-    user: string
+    id:string,
+    user: string,
+    ht:string,
+    img:string,
+    post:string
 }

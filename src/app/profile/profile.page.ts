@@ -18,33 +18,6 @@ export class ProfilePage implements OnInit {
 
   constructor(private afs:AngularFirestore, private user:UserService, private uploaderService: UploaderService, private router: Router) {
    
-    const usr = this.user.getUID()
-    console.log(usr)
-    // this.uploaderService.getPhotos().subscribe((ImageData)=>{
-    //   console.log(ImageData);
-    //   const images:Post[] = [];
-    //   for(const key in ImageData){
-    //     if(ImageData.hasOwnProperty(key)){
-    //       images.push({
-    //         id:key,
-    //         user:ImageData[key].user,
-    //         desc:ImageData[key].desc,
-    //         img:ImageData[key].img
-    //       });
-    //     }
-    //   }
-    //   this.posts = images;
-    //   console.log(this.posts)
-    // });
-
-    this.postSub = this.uploaderService.getPhotosForUser(usr).subscribe((posts)=>{
-      this.posts = posts;
-      console.log(posts);
-    })
-
-    console.log(this.posts)
-    //this.userPosts = posts.valueChanges
-    console.log(this.userPosts)
     }
 
     goTo(postID: string){
@@ -53,7 +26,12 @@ export class ProfilePage implements OnInit {
     }
 
   ngOnInit() {
-      
+    const usr = this.user.getUID()
+    console.log(usr)
+    this.postSub = this.uploaderService.getPhotosForUser(usr).subscribe((posts)=>{
+      this.posts = posts;
+      console.log(posts);
+    })
   }
 
 }

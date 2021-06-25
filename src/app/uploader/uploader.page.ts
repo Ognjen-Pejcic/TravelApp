@@ -44,6 +44,17 @@ export class UploaderPage implements OnInit {
     private router:Router
     ) { }
 
+    // textAreasList:any = [];
+
+    // addTextarea(){        
+    //     this.textAreasList.push('text_area'+ (this.textAreasList.length + 1));
+    // }
+
+
+    // removeTextArea(index){
+    //     this.textAreasList.splice(index, 1);
+    // }
+
   ngOnInit() {
     this.uploaderService.getPhotos().subscribe((ImageData)=>{
       console.log(ImageData);

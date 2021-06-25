@@ -3,17 +3,22 @@ import {HttpClient} from '@angular/common/http';
 import { BehaviorSubject } from "rxjs";
 import {Post} from './post.model'
 import {Likes} from './likes.model'
-import {map, switchMap, take, tap} from 'rxjs/operators';
+import {first, map, switchMap, take, tap} from 'rxjs/operators';
+
 interface ImageData{
     user: string,
     description: string,
     img: string,
     posts: Post[]
+  
 }
 
 
 interface LikeData{
-  user: string,
+  post:string
+  userID: string,
+  ht:string,
+  img:string,
   posts: Post[]
 }
 
@@ -76,6 +81,35 @@ export class UploaderService{
             })
           );
       }
+
+
+      getLikes(){
+        return this.http.get<{[key: string]:LikeData}>(`https://project-24716-default-rtdb.europe-west1.firebasedatabase.app/likes.json`)
+        .pipe(
+            map((likedata) => {
+              const likes: Likes[] = [];
+              for (const key in likedata) {
+                if (likedata.hasOwnProperty(key)) {
+                  
+                 likes.push({
+                    id: key,
+                    post:likedata[key].post,
+                    user:likedata[key].userID,
+                    ht:likedata[key].ht,
+                    img:likedata[key].img
+                  });
+                }
+              }
+              console.log(likes)
+              return likes;
+            }),
+            tap(likes => {
+              this._likes.next(likes);
+            }),
+          );
+      }
+
+
 
 
       getPhotosForUser(idd:string){
@@ -145,11 +179,11 @@ export class UploaderService{
           addLike(post: string, userID:string){
             console.log(post, userID)
             let generatedId;
+            console.log("User id je" , userID)
             return this.http.post<{id: number}>(`https://project-24716-default-rtdb.europe-west1.firebasedatabase.app/likes.json`, {
               post,
-            //    posts: {description,
-            //     img}
-            generatedId:userID
+            userID
+            
             }).pipe(
                 switchMap((resData) => {
                   generatedId = resData.id;
@@ -163,7 +197,29 @@ export class UploaderService{
                 //     id:userID
                 //   }));
                 // }));
-            )}
+            )} 
+            
+            deleteLike(like:string ){
+              console.log(like)
+              let generatedId;
+           
+              //this.http.delete(`https://my-angular8-prjt.firebaseio.com/posts/${id}.json`)
+              return this.http.delete<{id: number}>(`https://project-24716-default-rtdb.europe-west1.firebasedatabase.app/likes/${like}.json`, {
+              
+              }).pipe(
+                  switchMap((resData) => {
+                   // generatedId = resData.id;
+                    return this.likes;
+                  })
+                  //,
+                  // take(1),
+                  // tap((likes) => {
+                  //   this._likes.next(likes.concat({
+                  //     post,
+                  //     id:userID
+                  //   }));
+                  // }));
+              )}
          
 
 }
