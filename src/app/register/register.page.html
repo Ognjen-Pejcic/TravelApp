@@ -34,6 +34,9 @@
 
   </ion-card>
 
+  <div class="ion-text-center">
+    <ion-spinner color="primary" *ngIf="isLoading"></ion-spinner>
+  </div>
 
-  <ion-button width ="3em"fill="solid" ion-left expand="block" color="primary" (click)="register()">Sign up</ion-button>
+  <ion-button width ="3em"fill="solid" ion-left expand="block" color="primary" (click)="register()" *ngIf="!isLoading">Sign up</ion-button>
 </ion-content>

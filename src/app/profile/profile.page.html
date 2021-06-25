@@ -1,8 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-buttons slot = "start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+    <!-- <div class="ion-text-center">
+      <ion-spinner color="primary" *ngIf="isLoading"></ion-spinner>
+    </div>
+
+    <ion-button fill="solid" color="primary" expand="block" (click)="logout()" *ngIf="!isLoading">Logout</ion-button>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content padding>
   <!-- <app-loading *ngIf="!userPosts"></app-loading> -->

@@ -10,7 +10,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AlertController } from '@ionic/angular';
+import { AlertController} from '@ionic/angular';
 import { Router } from '@angular/router';
 
 
@@ -30,8 +30,6 @@ export class UploaderPage implements OnInit {
 
   busy: boolean = false
 
-
-
   @ViewChild('fileButton') fileButton
 
 
@@ -41,8 +39,8 @@ export class UploaderPage implements OnInit {
     public user: UserService,
     public uploaderService:UploaderService,
     private alertController:AlertController,
-    private router:Router
-    ) { }
+    private router:Router,
+    ) {    }
 
   ngOnInit() {
     this.uploaderService.getPhotos().subscribe((ImageData)=>{
@@ -88,7 +86,7 @@ export class UploaderPage implements OnInit {
       })
 
       this.uploaderService.addPhoto(usr, desc, img).subscribe((posts)=>{});
- 
+
       this.busy = false
       this.imageURL = ""
       this.desc = ""

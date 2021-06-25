@@ -12,8 +12,20 @@ export class FeedPage implements OnInit {
   posts:Post[]
   heartType: string = "heart-outline"
   private postsub: Subscription
+  public toggled: boolean = false
+
   
-  constructor(private uploaderService:UploaderService) { }
+  constructor(private uploaderService:UploaderService) {
+    this.toggled = false
+  }
+
+  
+  cancelSearch(){
+    this.toggled = !this.toggled;
+  }
+  public toggle(): void {
+    this.toggled = !this.toggled;
+ }
 
   ngOnInit() {
   this.postsub = this.uploaderService.getPhotos().subscribe((posts)=>{

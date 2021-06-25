@@ -5,13 +5,16 @@
 </ion-header>
 
 <ion-content padding>
-
   <!-- <app-loading *ngIf="!busy"></app-loading> -->
 
   <!-- <div class="camera"></div> -->
   <!-- <div class="center" *ngIf="!busy"> -->
     <input type="file" *ngIf="!imageURL" (change)="fileChanged($event)" class="filebtn" #fileButton />
 
+    <div class="ion-text-center">
+      <ion-spinner color="primary" *ngIf="isLoading"></ion-spinner>
+    </div>
+  
     <ion-button shape="round" color="primary" (click)="uploadFile()" *ngIf="!imageURL" fill="outline">Upload File
     </ion-button>
     <ion-card *ngIf="imageURL">

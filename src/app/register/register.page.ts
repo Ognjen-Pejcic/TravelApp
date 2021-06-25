@@ -6,6 +6,7 @@ import {Router} from '@angular/router'
 
 import {AngularFirestore} from '@angular/fire/firestore'
 import { UserService } from '../user.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -17,13 +18,17 @@ export class RegisterPage implements OnInit {
   username: string = ""
   password: string = ""
   cpassword: string = ""
+  
+  isLoading = false
+
   constructor(
     public afAuth: AngularFireAuth, 
     public alert: AlertController,
     public router: Router,
     public afstore: AngularFirestore,
     public user: UserService,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private loadingController: LoadingController
     ) { }
 
   ngOnInit() {
@@ -46,6 +51,7 @@ async presentAlert(title: string, content: string){
     }
     try {
       const res = await this.afAuth.createUserWithEmailAndPassword(username + '@gmail.com', password)
+      this.isLoading = true;
       console.log(res)
       this.showAlert("Success!", "Welcome")
       this.router.navigate(['/tabs'])
@@ -60,8 +66,19 @@ async presentAlert(title: string, content: string){
         uid: res.user.uid
       })
 
-      this.presentAlert('Success!', 'You are registred!')
-      this.router.navigate(['/tabs'])
+      this.loadingController
+          .create({message:"Loading..."})
+          .then((loadingEl)=>{
+            loadingEl.present();
+                     
+          this.isLoading = false;
+          this.presentAlert('Success!', 'You are registred!')
+          this.router.navigate(['/tabs/feed'])
+          loadingEl.dismiss()
+          })
+
+      // this.presentAlert('Success!', 'You are registred!')
+      // this.router.navigate(['/tabs'])
       
     } catch (error) {
       console.dir(error)

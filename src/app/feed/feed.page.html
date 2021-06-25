@@ -1,10 +1,34 @@
 <ion-header>
   <ion-toolbar>
+<ion-row>
+  <ion-col>
     <ion-title>Feed</ion-title>
+
+  </ion-col>
+  <ion-col size = "2">
+    
+      <ion-icon end *ngIf="!toggled" (click)="toggle()" name="search" size="large"></ion-icon>
+  
+  
+    
+  </ion-col>
+
+ 
+</ion-row>
+    <!-- <ion-title>Feed<ion-icon end *ngIf="!toggled" (click)="toggle()" name="search"></ion-icon> </ion-title> -->
+
+    <!-- <div> -->
+      
+    
+    <ion-searchbar *ngIf="toggled" [(ngModel)]="someValue" (ionInput)="searchThis($event)"
+      (ionCancel)="cancelSearch($event)" (ionClear)="cancelSearch($event)" [showCancelButton]="true">
+    </ion-searchbar>
+    <!-- </div> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
   <!-- <div *ndIf="posts"> -->
   <ion-card *ngFor="let post of posts">
     <ion-img src="https://ucarecdn.com/{{post.img}}/-/preview/{{post.effect}}"></ion-img>

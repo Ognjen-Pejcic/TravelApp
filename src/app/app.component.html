@@ -1,3 +1,42 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <!-- <ion-menu side="start" content-id = "main">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content id="content">
+      <ion-list>
+        <ion-item>Edit profile</ion-item>
+        <ion-item>Logout</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet>id="main"</ion-router-outlet> -->
+
+  <ion-menu class="menu_main" side="start" content-id="content" >
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title>Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
+<ion-content id="content">
+ <ion-card>
+  <ion-list lines = "none">
+  <ion-menu-toggle>
+    <ion-item>Edit profile</ion-item>
+  </ion-menu-toggle>
+    <ion-menu-toggle>
+    <ion-item>
+      <div class="ion-text-center">
+        <ion-spinner color="white" *ngIf="isLoading"></ion-spinner>
+      </div>
+      <ion-button color='light' ion-item (click)="logout()" *ngIf="!isLoading">Logout</ion-button>
+    </ion-item>
+  </ion-menu-toggle>
+  </ion-list>
+</ion-card>
+</ion-content>
+</ion-menu>
+<ion-router-outlet>id="content"</ion-router-outlet>
 </ion-app>

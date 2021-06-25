@@ -5,6 +5,10 @@ import { UploaderService } from '../uploader/uploader.service';
 import {Post} from '../uploader/post.model'
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth'
+import { AlertController } from '@ionic/angular'
+import { LoadingController } from '@ionic/angular'
+
 
 @Component({
   selector: 'app-profile',
@@ -15,8 +19,17 @@ export class ProfilePage implements OnInit {
   posts: Post[]
   userPosts
   private postSub: Subscription
+  isLoading = false
 
-  constructor(private afs:AngularFirestore, private user:UserService, private uploaderService: UploaderService, private router: Router) {
+  constructor(
+    private afs:AngularFirestore, 
+    private user:UserService, 
+    private uploaderService: UploaderService, 
+    private router: Router, 
+    public afAuth: AngularFireAuth,
+    public alertController: AlertController,
+    private loadingController: LoadingController
+  ) {
    
     const usr = this.user.getUID()
     console.log(usr)
@@ -40,6 +53,7 @@ export class ProfilePage implements OnInit {
     this.postSub = this.uploaderService.getPhotosForUser(usr).subscribe((posts)=>{
       this.posts = posts;
       console.log(posts);
+    
     })
 
     console.log(this.posts)
@@ -55,5 +69,34 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
       
   }
+
+//   async presentAlert(title: string, content: string){
+//     const alert = await this.alertController.create({
+//       header: title,
+//       message: content,
+//       buttons: ['Ok']
+//     })
+//     await alert.present()
+//   }
+
+//  logout(){
+//    return this.afAuth.signOut().then(()=>{
+//     this.isLoading = true
+//     this.loadingController
+//     .create({message:"Loading..."})
+//     .then((loadingEl)=>{
+//       loadingEl.present();
+               
+//     this.isLoading = false;
+//     this.router.navigate(['/login'])
+//     loadingEl.dismiss()
+//     })
+    
+//     this.presentAlert('Success!', 'You are logged out!')
+//     this.router.navigate(['/login'])
+   
+//    })
+//  }
+ 
 
 }
