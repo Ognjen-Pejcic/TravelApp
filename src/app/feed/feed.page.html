@@ -28,16 +28,17 @@
 </ion-header>
 
 <ion-content padding>
-
-  <!-- <div *ndIf="posts"> -->
-  <ion-card *ngFor="let post of posts">
+  <!-- <div *ngIf="posts"> -->
+  <ion-card *ngFor="let post of likes">
     <ion-img src="https://ucarecdn.com/{{post.img}}/-/preview/{{post.effect}}"></ion-img>
     <ion-card-content>
       <p>{{post.desc}}</p>
     </ion-card-content>
 
-    <ion-item (click)="toggleHeart()">
-      <ion-icon [name]="heartType"></ion-icon>
+    <ion-item (click)="toggleHeart(post.post)">
+     
+
+      <ion-icon [name]="post.ht"></ion-icon>
     </ion-item>
   </ion-card>
   <!-- </div> -->

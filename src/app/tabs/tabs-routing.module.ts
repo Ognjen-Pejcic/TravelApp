@@ -8,10 +8,12 @@ const routes: Routes = [
     path: '',
     component:TabsPage, 
     children: [
-      {
-        path: 'tabs',
-        component: TabsPage
-      },
+      // {
+      //   path: 'tabs',
+        
+      //   component: TabsPage
+      // },
+      { path: '',   redirectTo: '/tabs/feed', pathMatch: 'full' },
       {
         path: 'uploader',
         loadChildren: () => import('../uploader/uploader.module').then(m => m.UploaderPageModule)

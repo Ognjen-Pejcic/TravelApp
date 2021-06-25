@@ -67,7 +67,12 @@ export class ProfilePage implements OnInit {
     }
 
   ngOnInit() {
-      
+    const usr = this.user.getUID()
+    console.log(usr)
+    this.postSub = this.uploaderService.getPhotosForUser(usr).subscribe((posts)=>{
+      this.posts = posts;
+      console.log(posts);
+    })
   }
 
 //   async presentAlert(title: string, content: string){
