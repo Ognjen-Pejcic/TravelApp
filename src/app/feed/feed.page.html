@@ -17,10 +17,12 @@
 </ion-row>
     <!-- <ion-title>Feed<ion-icon end *ngIf="!toggled" (click)="toggle()" name="search"></ion-icon> </ion-title> -->
 
-    <!-- <div> -->
+    <!-- <div> (ionInput)="searchThis($event)" -->
       
     
-    <ion-searchbar *ngIf="toggled" [(ngModel)]="someValue" (ionInput)="searchThis($event)"
+    <ion-searchbar *ngIf="toggled" 
+    (keyup)="searchThis($event)" 
+     [(ngModel)] = "filterTerm"
       (ionCancel)="cancelSearch($event)" (ionClear)="cancelSearch($event)" [showCancelButton]="true">
     </ion-searchbar>
     <!-- </div> -->
@@ -29,12 +31,16 @@
 
 <ion-content padding>
   <!-- <div *ngIf="posts"> -->
-  <ion-card *ngFor="let post of likes">
+  <ion-card *ngFor="let post of likes ">
     <ion-img src="https://ucarecdn.com/{{post.img}}/-/preview/{{post.effect}}"></ion-img>
     <ion-card-content>
       <p>{{post.desc}}</p>
     </ion-card-content>
-
+    <ion-card-content>
+     <ion-row>
+      <ion-icon name="location-outline"></ion-icon> <p> {{post.country}}, {{post.city}}</p>
+     </ion-row> 
+    </ion-card-content>
     <ion-item (click)="toggleHeart(post.post)">
      
 

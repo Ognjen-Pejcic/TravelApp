@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core'
 import { AngularFireAuth } from '@angular/fire/auth'
+import { UrlSegment } from '@angular/router'
 import {first} from 'rxjs/operators'
 
 interface user{
     username: string,
-    uid: string
+    uid: string,
+    photoURL:string,
+   // about:string
 }
 
 @Injectable()
@@ -28,7 +31,9 @@ export class UserService{
         if(user){
             this.setUser({
                 username: user.email.split('@')[0],
-                uid: user.uid
+                uid: user.uid,
+                photoURL:user.photoURL,
+            //    about:user.displayName
             })
             return true
         }

@@ -28,6 +28,7 @@ export class LoginPage implements OnInit {
 
 
   ngOnInit() {
+
   }
 
   async presentAlert(title: string, content: string){
@@ -47,7 +48,8 @@ export class LoginPage implements OnInit {
       if(res.user) {
           this.user.setUser({
             username,
-            uid: res.user.uid
+            uid: res.user.uid,
+            photoURL:res.user.photoURL
           })
           this.loadingController
           .create({message:"Loading..."})
@@ -66,8 +68,7 @@ export class LoginPage implements OnInit {
         console.log("user not found")
       }
     }
-    this.username = ""
-    this.password = ""
+    
    
   }
 
