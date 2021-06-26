@@ -63,7 +63,8 @@ async presentAlert(title: string, content: string){
 
       this.user.setUser({
         username,
-        uid: res.user.uid
+        uid: res.user.uid,
+        photoURL:res.user.photoURL
       })
 
       this.loadingController

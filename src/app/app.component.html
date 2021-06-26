@@ -24,15 +24,16 @@
  <ion-card>
   <ion-list lines = "none">
   <ion-menu-toggle>
-    <ion-item>Edit profile</ion-item>
+    <ion-item > <ion-button size = "large" class = "btn"></ion-button> <p class="txt">Edit profile</p> </ion-item>
   </ion-menu-toggle>
     <ion-menu-toggle>
-    <ion-item>
+   
       <div class="ion-text-center">
         <ion-spinner color="white" *ngIf="isLoading"></ion-spinner>
       </div>
-      <ion-button color='light' ion-item (click)="logout()" *ngIf="!isLoading">Logout</ion-button>
-    </ion-item>
+      <ion-item> <ion-button  ion-item (click)="logout()" *ngIf="!isLoading" size = "large" class="btn"></ion-button> <p class="txt">Logout</p> </ion-item>
+      <!-- <ion-button color='light' ion-item (click)="logout()" *ngIf="!isLoading">Logout</ion-button> -->
+    
   </ion-menu-toggle>
   </ion-list>
 </ion-card>

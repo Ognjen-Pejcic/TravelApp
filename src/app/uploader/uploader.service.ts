@@ -10,7 +10,8 @@ interface ImageData{
     description: string,
     img: string,
     posts: Post[]
-  
+    country:string,
+    city:string
 }
 
 
@@ -34,14 +35,14 @@ export class UploaderService{
     constructor( private http: HttpClient){ 
         
     }
-    addPhoto(user: string, description: string, img: string){
-        console.log(user, description,img)
+    addPhoto(user: string, description: string, img: string, country:string, city:string){
+        console.log(user, description,img, country, city)
         let generatedId;
         return this.http.post<{name: string}>(`https://project-24716-default-rtdb.europe-west1.firebasedatabase.app/images.json`, {
             user,
         //    posts: {description,
         //     img}
-            description, img
+            description, img, country, city
         }).pipe(
             switchMap((resData) => {
               generatedId = resData.name;
@@ -53,7 +54,7 @@ export class UploaderService{
                 id : generatedId,
                 user,
                 desc:description,
-                img
+                img, country, city
               }));
             }));
       
@@ -70,7 +71,9 @@ export class UploaderService{
                     id: key,
                     user:imagesdata[key].user,
                     desc:imagesdata[key].description,
-                    img:imagesdata[key].img
+                    img:imagesdata[key].img,
+                    country:imagesdata[key].country,
+                    city:imagesdata[key].city
                   });
                 }
               }
@@ -127,7 +130,10 @@ export class UploaderService{
                       id: key,
                       user:imagesdata[key].user,
                       desc:imagesdata[key].description,
-                      img:imagesdata[key].img
+                      img:imagesdata[key].img,
+                    country:imagesdata[key].country,
+                    city:imagesdata[key].city
+
                     });
                   }
                   
@@ -162,7 +168,9 @@ export class UploaderService{
                           id: key,
                           user:imagesdata[key].user,
                           desc:imagesdata[key].description,
-                          img:imagesdata[key].img
+                          img:imagesdata[key].img,
+                          country:imagesdata[key].country,
+                          city:imagesdata[key].city
                         });
                       }
                   

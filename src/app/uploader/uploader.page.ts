@@ -25,6 +25,8 @@ export class UploaderPage implements OnInit {
 
   imageURL:string
   desc: string
+  city:string
+  country:string
   posts: Post[]
   private postSub: Subscription
 
@@ -54,21 +56,21 @@ export class UploaderPage implements OnInit {
     // }
 
   ngOnInit() {
-    this.uploaderService.getPhotos().subscribe((ImageData)=>{
-      console.log(ImageData);
-      const images:Post[] = [];
-      for(const key in ImageData){
-        if(ImageData.hasOwnProperty(key)){
-          images.push({
-            id:key,
-            user:ImageData[key].user,
-            desc:ImageData[key].desc,
-            img:ImageData[key].img
-          });
-        }
-      }
-      this.posts = images;
-    });
+    // this.uploaderService.getPhotos().subscribe((ImageData)=>{
+    //   console.log(ImageData);
+    //   const images:Post[] = [];
+    //   for(const key in ImageData){
+    //     if(ImageData.hasOwnProperty(key)){
+    //       images.push({
+    //         id:key,
+    //         user:ImageData[key].user,
+    //         desc:ImageData[key].desc,
+    //         img:ImageData[key].img
+    //       });
+    //     }
+    //   }
+    //   this.posts = images;
+    // });
   }
 
   async createPost(){
@@ -76,7 +78,8 @@ export class UploaderPage implements OnInit {
     const img = this.imageURL
     const desc = this.desc
     const usr = this.user.getUID()
-  
+    const city  =this.city
+    const country =this.country
   console.log(usr);
     // this.afstore.doc(`users/${this.user.getUID()}`).update({
     //   posts: firebase.firestore.FieldValue.arrayUnion({
@@ -84,19 +87,21 @@ export class UploaderPage implements OnInit {
     //   })
      
     
-      this.http.post<{name: string}>(`https://project-24716-default-rtdb.europe-west1.firebasedatabase.app/images.json`, {
-          usr,
-          desc,
-          img
-      });
+      // this.http.post<{name: string}>(`https://project-24716-default-rtdb.europe-west1.firebasedatabase.app/images.json`, {
+      //     usr,
+      //     desc,
+      //     img,
+      //     city,
+      //     country
+      // });
 
-      this.afstore.doc(`posts/${Image}`).set({
-        desc,
-        user: this.user.getUsername(),
-        likes: []
-      })
+      // this.afstore.doc(`posts/${Image}`).set({
+      //   desc,
+      //   user: this.user.getUsername(),
+      //   likes: []
+      // })
 
-      this.uploaderService.addPhoto(usr, desc, img).subscribe((posts)=>{});
+      this.uploaderService.addPhoto(usr, desc, img, country, city).subscribe((posts)=>{});
 
       this.busy = false
       this.imageURL = ""

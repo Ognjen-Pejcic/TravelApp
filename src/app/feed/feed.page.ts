@@ -13,7 +13,9 @@ interface PostData{
   ht:string,
   img:string,
   desc:string
-  user:string
+  user:string,
+  country:string,
+  city:string
 }
 @Component({
   selector: 'app-feed',
@@ -23,14 +25,16 @@ interface PostData{
 
 
 export class FeedPage implements OnInit {
+  filterTerm:string
   posts:Post[]
   likes: Array<PostData> = [];
+  temp: Array<PostData> = [];
   likess: Array<Likes> = [];
   //likes:Likes[]
    heartType: string = "heart-outline"
   private postsub: Subscription
   public toggled: boolean = false
-  
+  search=""
   cancelSearch(){
     this.toggled = !this.toggled;
   }
@@ -72,6 +76,8 @@ export class FeedPage implements OnInit {
           myObject.user = like.user;
           myObject.ht = "heart";
           myObject.img = post.img;
+          myObject.country = post.country;
+          myObject.city = post.city;
           this.likes.push(myObject)
          
         }
@@ -82,10 +88,13 @@ export class FeedPage implements OnInit {
           myObject.desc = post.desc;
           myObject.ht = "heart-outline";
           myObject.img = post.img;
+          myObject.country = post.country;
+          myObject.city = post.city;
           this.likes.push(myObject)
       }
     });
     })
+    this.temp = this.likes
     console.log(this.likes)
   });
   }
@@ -128,5 +137,53 @@ export class FeedPage implements OnInit {
      } 
     });
    
+  }
+  searchThis($event){
+    console.log(this.filterTerm, $event, $event.key)
+    if( $event.code=="ShiftLeft" || $event.code=="CapsLock" || $event.code=="Escape"){}
+    else if($event.keyCode!=8 )
+    this.search = this.search + $event.key
+    
+    else
+    this.search = this.search.substr(0,this.search.length-1 )
+    console.log("search string je:" + this.search)
+    if(this.search=="" || this.search===undefined){
+      this.likes = this.temp
+    }else{
+    this.likes = [];
+    console.log(this.posts)
+    this.posts.forEach(post => {
+      if(post.city.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()) || post.country.toLocaleLowerCase().includes(this.search.toLocaleLowerCase())){
+      let provera = false;
+      this.likess.forEach(like=>{
+        console.log(post.id,like.post, like.user,this.userService.getUID())
+        if(post.id==like.post && like.user==this.userService.getUID()){
+          provera=true
+          var myObject = {} as PostData;
+          myObject.likeid = like.id;
+          myObject.post = post.id;
+          myObject.desc = post.desc
+          myObject.user = like.user;
+          myObject.ht = "heart";
+          myObject.img = post.img;
+          myObject.country = post.country;
+          myObject.city = post.city;
+          this.likes.push(myObject)
+         
+        }
+      })
+      if(provera==false){
+        var myObject = {} as PostData;
+          myObject.post = post.id;
+          myObject.desc = post.desc;
+          myObject.ht = "heart-outline";
+          myObject.img = post.img;
+          myObject.country = post.country;
+          myObject.city = post.city;
+          this.likes.push(myObject)
+      }
+    }
+    });
+  }
   }
 }

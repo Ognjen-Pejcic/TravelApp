@@ -21,7 +21,8 @@
       <img src="https://ucarecdn.com/{{imageURL}}/" />
       <ion-card-content>
         <ion-textarea placeholder="Enter some description" [(ngModel)]="desc"></ion-textarea>
-
+        <ion-textarea placeholder="Enter country" [(ngModel)]="country"></ion-textarea>
+        <ion-textarea placeholder="Enter city" [(ngModel)]="city"></ion-textarea>
         <ion-button shape="round" color="primary" (click)="createPost()">POST</ion-button>
       
       </ion-card-content>
