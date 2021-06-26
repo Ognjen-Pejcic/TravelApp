@@ -30,6 +30,10 @@ const routes: Routes = [
         path: 'post/:id',
         loadChildren: () => import('../post/post.module').then( m => m.PostPageModule)
       },
+      {
+        path: 'edit',
+        loadChildren: () => import('../edit/edit.module').then(m => m.EditPageModule)
+      },
     ]
   }
 

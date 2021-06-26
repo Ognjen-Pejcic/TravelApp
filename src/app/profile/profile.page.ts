@@ -13,14 +13,15 @@ import { LoadingController } from '@ionic/angular'
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit {
   posts: Post[]
   userPosts
   private postSub: Subscription
   isLoading = false
-
+   username :String
+   photoURL:string
   constructor(
     private afs:AngularFirestore, 
     private user:UserService, 
@@ -31,8 +32,10 @@ export class ProfilePage implements OnInit {
     private loadingController: LoadingController
   ) {
    
-    const usr = this.user.getUID()
-    console.log(usr)
+  
+    
+    //console.log(usr)
+    console.log(this.username)
     // this.uploaderService.getPhotos().subscribe((ImageData)=>{
     //   console.log(ImageData);
     //   const images:Post[] = [];
@@ -50,15 +53,7 @@ export class ProfilePage implements OnInit {
     //   console.log(this.posts)
     // });
 
-    this.postSub = this.uploaderService.getPhotosForUser(usr).subscribe((posts)=>{
-      this.posts = posts;
-      console.log(posts);
-    
-    })
-
-    console.log(this.posts)
-    //this.userPosts = posts.valueChanges
-    console.log(this.userPosts)
+   
     }
 
     goTo(postID: string){
@@ -66,8 +61,29 @@ export class ProfilePage implements OnInit {
       this.router.navigate(['/tabs/post/' + postID])
     }
 
+    ionViewWillEnter(){
+
+      const usr = this.user.getUID()
+
+      this.postSub = this.uploaderService.getPhotosForUser(usr).subscribe((posts)=>{
+        this.posts = posts;
+        console.log(posts);
+      
+      })
+  
+      console.log(this.posts)
+      //this.userPosts = posts.valueChanges
+      console.log(this.userPosts)
+
+      this.username = this.user.getUsername();
+      console.log(this.username)
+      this.photoURL = this.user.getImageURL();
+      if(this.photoURL==null)
+      this.photoURL = "../../assets/avatar.png"
+    }
   ngOnInit() {
     const usr = this.user.getUID()
+    this.username = this.user.getUsername()
     console.log(usr)
     this.postSub = this.uploaderService.getPhotosForUser(usr).subscribe((posts)=>{
       this.posts = posts;

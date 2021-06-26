@@ -9,13 +9,29 @@
   <!-- <app-loading *ngIf="!post"></app-loading> -->
 
   <ion-card *ngIf="post as postData">
-    <ion-img src = "https://ucarecdn.com/{{postData.img}}/"></ion-img>
-  <ion-card-content>
-    <p>{{postData.desc}}</p>
-  </ion-card-content>
+    <ion-img src="https://ucarecdn.com/{{postData.img}}/"></ion-img>
+    <ion-card-content>
+      <p>{{postData.desc}}</p>
+      <p>{{postData.country}}, {{postData.city}}</p>
+    </ion-card-content>
 
-  <ion-item (click) = "toggleHeart()">
-    <ion-icon [name] = "heartType"></ion-icon>
-  </ion-item>
-</ion-card>
+    <ion-row>
+      <ion-col size="10">
+        <ion-item (click)="toggleHeart()">
+          <ion-icon [name]="heartType"></ion-icon>
+
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+
+        <ion-item (click)="delete()">
+
+          <ion-icon name="trash-outline" slot="end"></ion-icon>
+        </ion-item>
+      </ion-col>
+      
+    </ion-row>
+
+
+  </ion-card>
 </ion-content>

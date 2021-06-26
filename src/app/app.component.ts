@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(   private router: Router, 
     public afAuth: AngularFireAuth,
     public alertController: AlertController,
-    private loadingController: LoadingController) {}
+    private loadingController: LoadingController,) {}
 
     async presentAlert(title: string, content: string){
       const alert = await this.alertController.create({
@@ -42,5 +42,8 @@ export class AppComponent {
       this.router.navigate(['/login'])
      
      })
+  }
+  edit(){
+    this.router.navigate(['/tabs/edit'])
   }
 }

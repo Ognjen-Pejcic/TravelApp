@@ -27,7 +27,7 @@ export class UserService{
             return true
 
         const user = await this.afAuth.authState.pipe(first()).toPromise()
-    
+        
         if(user){
             this.setUser({
                 username: user.email.split('@')[0],
@@ -60,5 +60,8 @@ export class UserService{
 
     getUsername(): string {
 		return this.user.username
+	}
+    getImageURL(): string {
+		return this.user.photoURL
 	}
 }

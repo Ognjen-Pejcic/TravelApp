@@ -44,12 +44,12 @@
 
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot = "start">
+    <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Profile</ion-title>
   </ion-toolbar>
-</ion-header> 
+</ion-header>
 
 
 <ion-content fullscreen="true" slot="fixed" class="background">
@@ -59,46 +59,30 @@
   <div class="card">
     <div class="header">
       <div class="avatar">
-        <img src="../../assets/avatar.png" alt="">
+        <img src={{photoURL}} alt="">
 
 
-        
+
       </div>
     </div>
 
     <div class="card-body">
       <div class="user-meta ion-text-center">
-        <h3 class="playername">Andrijana Milovanovic</h3>
+        <h3 class="playername">{{username}}</h3>
       </div>
-      <ion-button class="edit" expand="full" color="primary">Change profile</ion-button>
+      
     </div>
   </div>
 
-
-
-  <div id = "profile-info" *ngIf="username">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="4" class = "user-image">
-          <ion-img src="https://ucarecdn.com/{{profilePic}}/-/scale_crop/200x200/center/"></ion-img>
-        </ion-col>
-        <ion-col size = "8">
-          <p>{{username}}</p>
-          <ion-button shape = "round" color="primary" routerLink="/tabs/edit-profile">Edit profile</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-
-
-    
+  <div id="images">
     <div class="image" *ngFor="let post of posts">
-     
 
-      <img (click)="goTo(post.id)" class="main-image" src="https://ucarecdn.com/{{post.img}}/-/scale_crop/200x200/center/"/>
 
+      <img (click)="goTo(post.id)" class="main-image"
+        src="https://ucarecdn.com/{{post.img}}/-/scale_crop/200x200/center/" />
+       
     </div>
 
-
+  </div>
 
 </ion-content>

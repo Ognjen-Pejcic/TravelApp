@@ -1,0 +1,46 @@
+
+<ion-header translucent no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/tabs/profile">
+        <ion-icon slot="start" name="return-down-back-outline" ></ion-icon>
+        Profile
+      </ion-button>
+    </ion-buttons>
+    <ion-title>&nbsp;</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name = "accessibility-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <input type="file"   (change)="fileChanged($event)" class="filebtn" #fileButton />
+ 
+  <div class="card">
+    <div class="header">
+      <div class="avatar">
+        
+        <button class = "bnt-slika" block (click)="uploadFile()">
+          <img src={{url}} alt="" >
+        </button>
+
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="user-meta ion-text-center">
+        <ion-textarea placeholder="New username" [(ngModel)] = "username">Current username: {{currusername}}</ion-textarea>
+        <ion-label position="floating" >Confirm password</ion-label>
+        <ion-input placeholder="New password" [(ngModel)] = "password" type="password"></ion-input>
+        <ion-label position="floating" >Confirm password</ion-label>
+        <ion-input placeholder="New password" [(ngModel)] = "confpassword" type="password"></ion-input>
+        <!-- <h3 class="playername">{{username}}</h3> -->
+      </div>
+      <ion-button class="edit" shape="round" expand="full" color="primary" (click) = "edit()">Save
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
