@@ -1,5 +1,5 @@
 ion-content.background{
-    --background: url(../../assets/pp.jpg) 0 0/100% 100% no-repeat;
+    --background: url(../../assets/login.jpg) 0 0/100% 100% no-repeat;
 
 
 }
@@ -8,7 +8,7 @@ page-register{
     .background{
         width: 100%;
         height: 100%;
-        background-image: url(../../assets/back.png) 0 0/100% 100% no-repeat;
+        background-image: url(../../assets/login.jpg) 0 0/100% 100% no-repeat;
     }
     .scroll-content{
         text-align: center;
@@ -47,9 +47,10 @@ ion-card{
     display: table;
     margin: 0 auto;
     margin-top: 1em;
-    color:royalblue;
+    color:rgb(240, 240, 240);
     font-size: 3em;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'New Century Schoolbook', 'TeX Gyre Schola', serif;
+    font-style: oblique;
     font-weight: lighter;
 }
 .cont{
