@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import {UploaderService} from '../uploader/uploader.service';
+import {UploaderService} from '../uploader/crud';
 import {UserService} from '../user.service';
 import {Post} from '../uploader/post.model';
 import {Likes} from '../uploader/likes.model';
@@ -65,6 +65,7 @@ export class FeedPage implements OnInit {
     
     this.posts.forEach(post => {
       let provera = false;
+      if(post.user != this.userService.getUID()){
       this.likess.forEach(like=>{
         console.log(post.id,like.post, like.user,this.userService.getUID())
         if(post.id==like.post && like.user==this.userService.getUID()){
@@ -92,8 +93,11 @@ export class FeedPage implements OnInit {
           myObject.city = post.city;
           this.likes.push(myObject)
       }
+    }
     });
+    
     })
+    
     this.temp = this.likes
     console.log(this.likes)
   });
@@ -127,7 +131,7 @@ export class FeedPage implements OnInit {
           console.log(entity.post,id,entity.user,this.userService.getUID())
           if(entity.post==id && entity.user==this.userService.getUID()){
             this.postsub = this.uploaderService.deleteLike(entity.id).subscribe((like)=>{
-             // console.log('izbrisan')
+             console.log('izbrisan') 
             })
           }
         });

@@ -98,8 +98,8 @@ export class UploaderService {
                 id: key,
                 post: likedata[key].post,
                 user: likedata[key].userID,
-                ht: likedata[key].ht,
-                img: likedata[key].img
+                // ht: likedata[key].ht,
+                // img: likedata[key].img
               });
             }
           }
@@ -197,15 +197,15 @@ export class UploaderService {
         generatedId = resData.id;
         return this.likes;
       })
-      //,
-      // take(1),
-      // tap((likes) => {
-      //   this._likes.next(likes.concat({
-      //     post,
-      //     id:userID
-      //   }));
-      // }));
-    )
+      ,
+      take(1),
+      tap((likes) => {
+        this._likes.next(likes.concat({
+          post,
+          id:userID,user : userID
+        }));
+      }));
+    
   }
 
   deleteLike(like: string) {
@@ -219,6 +219,8 @@ export class UploaderService {
       switchMap((resData) => {
         // generatedId = resData.id;
         return this.likes;
+      }),take(1), tap((posts)=>{
+        this._likes.next(posts.filter((q)=>q.id!==like))
       })
       //,
       // take(1),
@@ -242,7 +244,10 @@ export class UploaderService {
       switchMap((resData) => {
         // generatedId = resData.id;
         return this.posts;
+      }),take(1), tap((posts)=>{
+        this._posts.next(posts.filter((q)=>q.id!==id))
       })
-    )}
+    )
+  }
 }
 

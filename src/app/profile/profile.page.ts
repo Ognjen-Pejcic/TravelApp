@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserService } from '../user.service';
-import { UploaderService } from '../uploader/uploader.service';
+import { UploaderService } from '../uploader/crud';
 import {Post} from '../uploader/post.model'
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';

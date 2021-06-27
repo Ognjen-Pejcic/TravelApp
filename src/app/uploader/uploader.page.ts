@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {UploaderService} from './uploader.service';
+import {UploaderService} from './crud';
 import{Post} from './post.model';
 
 import { UserService } from '../user.service';
