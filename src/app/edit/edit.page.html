@@ -33,6 +33,8 @@
     <div class="card-body">
       <div class="user-meta ion-text-center">
         <ion-textarea placeholder="New username" [(ngModel)] = "username">Current username: {{currusername}}</ion-textarea>
+        <ion-label position="floating" >Current password</ion-label>
+        <ion-input placeholder="Current password" [(ngModel)] = "currpassword" type="password"></ion-input>
         <ion-label position="floating" >Confirm password</ion-label>
         <ion-input placeholder="New password" [(ngModel)] = "password" type="password"></ion-input>
         <ion-label position="floating" >Confirm password</ion-label>

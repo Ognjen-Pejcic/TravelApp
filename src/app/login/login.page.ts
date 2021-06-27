@@ -1,9 +1,9 @@
 import { ThrowStmt } from '@angular/compiler';
 import { stringify } from '@angular/compiler/src/util';
-import { Component, OnInit } from '@angular/core';
+import { Component, ContentChild, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth'
 import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, IonInput, LoadingController } from '@ionic/angular';
 import { UserService } from '../user.service';
 
 
@@ -17,6 +17,9 @@ export class LoginPage implements OnInit {
   username: string = ""
   password: string = ""
   isLoading = false
+  type = "password"
+  showPassword = false;
+  @ContentChild(IonInput) input: IonInput;
 
   constructor(
     public afAuth: AngularFireAuth, 
@@ -29,6 +32,11 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
 
+  }
+  toggleShow() {
+    this.showPassword = !this.showPassword;
+    if (this.type == "password")this.type = "text"
+    else this.type = "password";
   }
 
   async presentAlert(title: string, content: string){
