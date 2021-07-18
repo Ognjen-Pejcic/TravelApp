@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { UploaderService } from '../uploader/uploader.service';
+import { UploaderService } from '../uploader/crud';
 import { UserService } from '../user.service';
 import { Post } from '../uploader/post.model'
 import { Likes } from '../uploader/likes.model'
@@ -99,6 +99,10 @@ export class PostPage implements OnInit {
       });
     }
     else {
+      this.postSub = this.uploaderService.getLikes().subscribe((likes) => {
+        this.likess = likes;
+        console.log(this.likess)
+      });
       this.likess.forEach(entity => {
         console.log(entity.post, this.post.id, entity.user, this.userService.getUID())
 
@@ -106,7 +110,7 @@ export class PostPage implements OnInit {
 
         if (entity.post == this.post.id && entity.user == this.userService.getUID()) {
           this.postSub = this.uploaderService.deleteLike(entity.id).subscribe((like) => {
-            // console.log('izbrisan')
+             console.log('izbrisan')
           })
         }
 

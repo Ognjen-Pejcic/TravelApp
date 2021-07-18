@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { UploaderService } from '../uploader/uploader.service';
-import { UserService } from '../user.service';
-import { Post } from '../uploader/post.model';
-import { Likes } from '../uploader/likes.model';
+import {UploaderService} from '../uploader/crud';
+import {UserService} from '../user.service';
+import {Post} from '../uploader/post.model';
+import {Likes} from '../uploader/likes.model';
 import { Router } from '@angular/router';
 
 interface PostData {
@@ -61,6 +61,7 @@ export class FeedPage implements OnInit {
     this.uploaderService.getLikes().subscribe((likes) => {
       console.log(this.uploaderService._likes)
       this.likess = likes;
+<<<<<<< HEAD
       // console.log(this.likess)
 
       this.uploaderService.getPhotos().subscribe((posts) => {
@@ -98,12 +99,61 @@ export class FeedPage implements OnInit {
             myObject.city = post.city;
             this.likes.push(myObject)
           }
+=======
+      console.log(this.likess)
+   
+
+   console.log(this.likess)
+  this.postsub = this.uploaderService.getPhotos().subscribe((posts)=>{
+    this.posts = posts;
+    console.log(posts)
+    
+    this.posts.forEach(post => {
+      let provera = false;
+      if(post.user != this.userService.getUID()){
+      this.likess.forEach(like=>{
+        console.log(post.id,like.post, like.user,this.userService.getUID())
+        if(post.id==like.post && like.user==this.userService.getUID()){
+          provera=true
+          var myObject = {} as PostData;
+          myObject.likeid = like.id;
+          myObject.post = post.id;
+          myObject.desc = post.desc
+          myObject.user = like.user;
+          myObject.ht = "heart";
+          myObject.img = post.img;
+          myObject.country = post.country;
+          myObject.city = post.city;
+          this.likes.push(myObject)
+         
+>>>>>>> 1cb6480be790174f8fa7d5b3091e2863778467d6
         }
         });
       })
+<<<<<<< HEAD
       this.temp = this.likes
       // console.log(this.likes)
     });
+=======
+      if(provera==false){
+        var myObject = {} as PostData;
+          myObject.post = post.id;
+          myObject.desc = post.desc;
+          myObject.ht = "heart-outline";
+          myObject.img = post.img;
+          myObject.country = post.country;
+          myObject.city = post.city;
+          this.likes.push(myObject)
+      }
+    }
+    });
+    
+    })
+    
+    this.temp = this.likes
+    console.log(this.likes)
+  });
+>>>>>>> 1cb6480be790174f8fa7d5b3091e2863778467d6
   }
   toggleHeart(id: string) {
     const usrid = this.userService.getUID()
@@ -130,6 +180,7 @@ export class FeedPage implements OnInit {
         } else {
           console.log(like.likeid)
           console.log(this.likess)
+<<<<<<< HEAD
           console.log(this.likes)
           
           this.likess.forEach(entity => {
@@ -143,6 +194,23 @@ export class FeedPage implements OnInit {
 
           like.ht = "heart-outline"
         }
+=======
+       });
+      }else{
+        console.log(like.likeid)
+        console.log(this.likess)
+        console.log(this.likes)
+        this.likess.forEach(entity => {
+          console.log(entity.post,id,entity.user,this.userService.getUID())
+          if(entity.post==id && entity.user==this.userService.getUID()){
+            this.postsub = this.uploaderService.deleteLike(entity.id).subscribe((like)=>{
+             console.log('izbrisan') 
+            })
+          }
+        });
+       
+        like.ht = "heart-outline"
+>>>>>>> 1cb6480be790174f8fa7d5b3091e2863778467d6
       }
     });
 

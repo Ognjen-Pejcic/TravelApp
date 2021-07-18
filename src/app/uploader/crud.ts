@@ -205,8 +205,8 @@ export class UploaderService {
       take(1),
       tap((likes) => {
         this._likes.next(likes.concat({
-          
-          id:userID,user:userID,post
+          post,
+          id:userID,user : userID
         }));
       }));
     
@@ -223,6 +223,8 @@ export class UploaderService {
       switchMap((resData) => {//switch map vraca posledju vrednost observabla
         // generatedId = resData.id;
         return this.likes;
+      }),take(1), tap((posts)=>{
+        this._likes.next(posts.filter((q)=>q.id!==like))
       })
       //,
       // take(1),
@@ -246,7 +248,10 @@ export class UploaderService {
       switchMap((resData) => {
         // generatedId = resData.id;
         return this.posts;
+      }),take(1), tap((posts)=>{
+        this._posts.next(posts.filter((q)=>q.id!==id))
       })
-    )}
+    )
+  }
 }
 

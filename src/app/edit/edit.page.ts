@@ -76,36 +76,36 @@ export class EditPage implements OnInit {
         return
       }
       
-      const nesto = await this.afAuth.currentUser
+      const user = await this.afAuth.currentUser
 
       
       //var cred = firebase.auth.EmailAuthProvider.credential
       console.log(this.currusername+"@gmail.com",this.currpassword)
-      var authResult = await nesto.reauthenticateWithCredential(
+      var authResult = await user.reauthenticateWithCredential(
         firebase.auth.EmailAuthProvider.credential(  this.currusername+"@gmail.com",this.currpassword)
       );
       
-      nesto.updateProfile({
+      user.updateProfile({
         photoURL: this.url
       }).then(() => {
 
       })
-      //nesto.photoURL = this.url
+      //user.photoURL = this.url
       console.log(username)
       if (username == null || username == undefined) { }
       else {
        
-        nesto.updatePassword(password)
+        user.updatePassword(password)
         console.log("password updateovan")
         console.log(this.currusername+"@gmail.com",password)
         
-        var authResult = await nesto.reauthenticateWithCredential(
+        var authResult = await user.reauthenticateWithCredential(
           firebase.auth.EmailAuthProvider.credential(  this.currusername+"@gmail.com",this.currpassword)
         );
-        const res = nesto.updateEmail(username + '@gmail.com')
+        const res = user.updateEmail(username + '@gmail.com')
         console.log("username updateovan")
-        // nesto.email = username + '@gmail.com'
-        // const res = nesto.updateProfile(nesto)
+        // user.email = username + '@gmail.com'
+        // const res = user.updateProfile(user)
         this.isLoading = true;
         console.log(res)
         this.showAlert("Success!", "Profile updated")
@@ -118,30 +118,30 @@ export class EditPage implements OnInit {
 
         this.user.setUser({
           username,
-          uid: nesto.uid,
-          photoURL: nesto.photoURL
+          uid: user.uid,
+          photoURL: user.photoURL
         })
 
 
 
       }
-      // const res = nesto.updateEmail(username + '@gmail.com')
-      // // nesto.email = username + '@gmail.com'
-      // // const res = nesto.updateProfile(nesto)
+      // const res = user.updateEmail(username + '@gmail.com')
+      // // user.email = username + '@gmail.com'
+      // // const res = user.updateProfile(user)
       // this.isLoading = true;
       // console.log(res)
       // this.showAlert("Success!", "Profile updated")
       // this.router.navigate(['/tabs'])
 
 
-      // this.afstore.doc(`users/${nesto.uid}`).set({
+      // this.afstore.doc(`users/${user.uid}`).set({
       //   username
       // })
 
       // this.user.setUser({
       //   username,
-      //   uid: nesto.uid,
-      //   photoURL:nesto.photoURL
+      //   uid: user.uid,
+      //   photoURL:user.photoURL
       // })
 
 
