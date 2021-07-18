@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth'
-
 import { AlertController } from '@ionic/angular'
 import {Router} from '@angular/router'
-
 import {AngularFirestore} from '@angular/fire/firestore'
 import { UserService } from '../user.service';
 import { LoadingController } from '@ionic/angular';
@@ -13,6 +11,7 @@ import { LoadingController } from '@ionic/angular';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
+
 export class RegisterPage implements OnInit {
 
   username: string = ""
@@ -47,7 +46,7 @@ async presentAlert(title: string, content: string){
     const { username, password, cpassword } = this
     if (password !== cpassword) {
       this.showAlert("Error!", "Passwords don't match")
-      return console.error("Passwords don't match")
+     // return console.error("Passwords don't match")
     }
     try {
       const res = await this.afAuth.createUserWithEmailAndPassword(username + '@gmail.com', password)
@@ -55,11 +54,6 @@ async presentAlert(title: string, content: string){
       console.log(res)
       this.showAlert("Success!", "Welcome")
       this.router.navigate(['/tabs'])
-
-
-      this.afstore.doc(`users/${res.user.uid}`).set({
-        username
-      })
 
       this.user.setUser({
         username,

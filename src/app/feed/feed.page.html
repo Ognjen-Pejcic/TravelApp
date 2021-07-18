@@ -23,7 +23,7 @@
     <ion-searchbar *ngIf="toggled" 
     (keyup)="searchThis($event)" 
      [(ngModel)] = "filterTerm"
-      (ionCancel)="cancelSearch($event)" (ionClear)="cancelSearch($event)" [showCancelButton]="true">
+      (ionCancel)="toggle()"  [showCancelButton]="true">
     </ion-searchbar>
     <!-- </div> -->
   </ion-toolbar>

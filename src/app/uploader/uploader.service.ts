@@ -30,8 +30,8 @@ interface LikeData {
 
 
 export class UploaderService {
-  private _posts = new BehaviorSubject<Post[]>([]);
-  private _likes = new BehaviorSubject<Likes[]>([]);
+  public _posts = new BehaviorSubject<Post[]>([]);
+  public _likes = new BehaviorSubject<Likes[]>([]);
   constructor(private http: HttpClient) {
 
   }
@@ -56,15 +56,18 @@ export class UploaderService {
           desc: description,
           img, country, city
         }));
-      }));
-
+      })
+      );
+     
   }
 
   getPhotos() {
+    console.log(this._posts) //ako je uspesno getovanje vraca to sto si getovao, poruka o uspesnosti
     return this.http.get<{ [key: string]: ImageData }>(`https://project-24716-default-rtdb.europe-west1.firebasedatabase.app/images.json`)
       .pipe(
         map((imagesdata) => {
           const images: Post[] = [];
+          console.log(imagesdata)
           for (const key in imagesdata) {
             if (imagesdata.hasOwnProperty(key)) {
               images.push({
@@ -78,8 +81,9 @@ export class UploaderService {
             }
           }
           return images;
-        }),
-        tap(images => {
+        })
+        ,tap(images => {
+          console.log(images);
           this._posts.next(images);
         })
       );
@@ -98,15 +102,15 @@ export class UploaderService {
                 id: key,
                 post: likedata[key].post,
                 user: likedata[key].userID,
-                ht: likedata[key].ht,
-                img: likedata[key].img
+                // ht: likedata[key].ht,
+                // img: likedata[key].img
               });
             }
           }
           console.log(likes)
           return likes;
-        }),
-        tap(likes => {
+        })
+        , tap(likes => {
           this._likes.next(likes);
         }),
       );
@@ -197,15 +201,15 @@ export class UploaderService {
         generatedId = resData.id;
         return this.likes;
       })
-      //,
-      // take(1),
-      // tap((likes) => {
-      //   this._likes.next(likes.concat({
-      //     post,
-      //     id:userID
-      //   }));
-      // }));
-    )
+      ,
+      take(1),
+      tap((likes) => {
+        this._likes.next(likes.concat({
+          
+          id:userID,user:userID,post
+        }));
+      }));
+    
   }
 
   deleteLike(like: string) {
@@ -216,7 +220,7 @@ export class UploaderService {
     return this.http.delete<{ id: number }>(`https://project-24716-default-rtdb.europe-west1.firebasedatabase.app/likes/${like}.json`, {
 
     }).pipe(
-      switchMap((resData) => {
+      switchMap((resData) => {//switch map vraca posledju vrednost observabla
         // generatedId = resData.id;
         return this.likes;
       })

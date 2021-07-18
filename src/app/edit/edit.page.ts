@@ -60,7 +60,6 @@ export class EditPage implements OnInit {
     })
   }
   async edit() {
-
     try {
 
       const password = this.password
@@ -80,7 +79,7 @@ export class EditPage implements OnInit {
       const nesto = await this.afAuth.currentUser
 
       
-      var cred = firebase.auth.EmailAuthProvider.credential
+      //var cred = firebase.auth.EmailAuthProvider.credential
       console.log(this.currusername+"@gmail.com",this.currpassword)
       var authResult = await nesto.reauthenticateWithCredential(
         firebase.auth.EmailAuthProvider.credential(  this.currusername+"@gmail.com",this.currpassword)
@@ -113,9 +112,9 @@ export class EditPage implements OnInit {
         // this.router.navigate(['/tabs'])
 
 
-        this.afstore.doc(`users/${nesto.uid}`).set({
-          username
-        })
+        // this.afstore.doc(`users/${nesto.uid}`).set({
+        //   username
+        // })
 
         this.user.setUser({
           username,
@@ -164,7 +163,7 @@ export class EditPage implements OnInit {
 
     } catch (error) {
       if (error.code = "auth/requires-recent-login") {
-        console.log("uaysvdoasudvoudvoasugvdasodvasdasodasd");
+        // console.log("uaysvdoasudvoudvoasugvdasodvasdasodasd");
       }
 
       console.dir(error)

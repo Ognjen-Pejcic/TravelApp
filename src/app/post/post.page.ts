@@ -117,11 +117,13 @@ export class PostPage implements OnInit {
       this.heartType = "heart-outline";
     }
   }
- async delete() {
-     this.postSub = await this.uploaderService.deletePost(this.postID).subscribe((post) => {
+    // async
+     delete() {
+   this.postSub =   this.uploaderService.deletePost(this.postID).subscribe((post) => {
       console.log('izbrisan');
-      this.router.navigate(['/tabs/profile'])
+     
     })
+    this.router.navigate(['/tabs/feed'])
   }
 }
 

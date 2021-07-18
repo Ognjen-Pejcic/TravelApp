@@ -41,20 +41,6 @@ export class UserService{
     }
 
     getUID(): string{
-        // if(!this.user){
-        //     if(this.afAuth.currentUser){
-        //         const user  = this.afAuth.currentUser
-        //         this.setUser({
-        //             username: user.email.split('@')[0],
-        //             uid: user.uid
-        //         })
-        //         return user.uid
-        //     }else{
-        //         throw new Error("User not logged in")
-        //     }
-        // }else{
-        //     return this.user.uid
-        // }
         return this.user.uid
     }
 
